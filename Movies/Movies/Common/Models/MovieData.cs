@@ -1,4 +1,4 @@
-﻿namespace Movies
+﻿namespace Movies.Common.Models
 {
     using Xamarin.Forms;
 

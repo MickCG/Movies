@@ -11,6 +11,8 @@ namespace Movies.Droid
 {
     using FFImageLoading.Forms.Platform;
 
+    using Movies.Application;
+
     [Activity(Label = "Movies", Icon = "@mipmap/icon", Theme = "@style/MainTheme", MainLauncher = true, ConfigurationChanges = ConfigChanges.ScreenSize | ConfigChanges.Orientation)]
     public class MainActivity : global::Xamarin.Forms.Platform.Android.FormsAppCompatActivity
     {

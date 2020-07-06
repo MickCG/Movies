@@ -1,0 +1,63 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+
+<ContentPage
+    xmlns="http://xamarin.com/schemas/2014/forms"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:ffimageloading="clr-namespace:FFImageLoading.Forms;assembly=FFImageLoading.Forms"
+    x:Class="Movies.Modules.Main.MainView"
+    NavigationPage.HasNavigationBar="False">
+    <ContentPage.Content>
+        <StackLayout Margin="0,40,0,0">
+            <Label Text="Movie Database"
+                   FontSize="Title"
+                   FontAttributes="Bold"
+                   Padding="10" />
+            <SearchBar Text="{Binding SearchText}" SearchCommand="{Binding PerformSearchCommand}" />
+            <CollectionView ItemsSource="{Binding Items}"
+                            SelectionMode="Single"
+                            SelectedItem="{Binding SelectedMovie}"
+                            SelectionChangedCommand="{Binding MovieChangedCommand}">
+                <CollectionView.ItemTemplate>
+                    <DataTemplate>
+                        <StackLayout>
+                            <Frame Padding="0"
+                                   CornerRadius="50"
+                                   Margin="10,20,10,0"
+                                   HorizontalOptions="Center"
+                                   IsClippedToBounds="True">
+                                <Grid>
+                                    <ffimageloading:CachedImage Source="{Binding Image}"
+                                                                Aspect="AspectFill"
+                                                                HeightRequest="300"
+                                                                LoadingPlaceholder="placeholder.png" />
+                                    <Label VerticalOptions="End"
+                                           Text="{Binding Title}"
+                                           FontSize="24"
+                                           TextColor="White"
+                                           BackgroundColor="Black"
+                                           Opacity="0.85"
+                                           VerticalTextAlignment="Center"
+                                           Padding="15,0,5,0"
+                                           LineBreakMode="WordWrap"
+                                           HeightRequest="65" />
+                                </Grid>
+                            </Frame>
+                        </StackLayout>
+                    </DataTemplate>
+                </CollectionView.ItemTemplate>
+                <CollectionView.EmptyView>
+                    <StackLayout HorizontalOptions="Center">
+                        <Image Source="placeholder.png"
+                               WidthRequest="100"
+                               HeightRequest="100" />
+                        <Label HorizontalTextAlignment="Center"
+                               Padding="20,10,10,10"
+                               Text="Enter your search term above..."
+                               FontSize="24"
+                               TextColor="Gray" />
+                    </StackLayout>
+                </CollectionView.EmptyView>
+            </CollectionView>
+        </StackLayout>
+    </ContentPage.Content>
+</ContentPage>

@@ -1,5 +1,7 @@
-﻿namespace Movies
+﻿namespace Movies.Modules.Main
 {
+    using Movies.Common.Network;
+
     using Xamarin.Forms;
 
     public partial class MainView : ContentPage

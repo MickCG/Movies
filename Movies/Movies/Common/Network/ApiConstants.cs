@@ -1,6 +1,6 @@
-﻿namespace Movies
+﻿namespace Movies.Common.Network
 {
-    public static class Constants
+    public static class ApiConstants
     {
         public static string GetApiUri(string search)
         {

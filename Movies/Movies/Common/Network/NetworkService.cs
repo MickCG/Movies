@@ -1,21 +1,10 @@
-﻿namespace Movies
+﻿namespace Movies.Common.Network
 {
     using System.Net.Http;
     using System.Text;
     using System.Threading.Tasks;
 
     using Newtonsoft.Json;
-
-    public interface INetworkService
-    {
-        Task DeleteAsync(string uri);
-
-        Task<TResult> GetAsync<TResult>(string uri);
-
-        Task<TResult> PostAsync<TResult>(string uri, string jsonData);
-
-        Task<TResult> PutAsync<TResult>(string uri, string jsonData);
-    }
 
     public class NetworkService : INetworkService
     {
