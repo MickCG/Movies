@@ -7,6 +7,7 @@
     using Autofac;
 
     using Movies.Common.Base;
+    using Movies.Modules.MovieDetails;
 
     using Xamarin.Forms;
 
@@ -16,7 +17,13 @@
 
         private readonly Func<INavigation> _navigation;
 
-        private readonly Dictionary<Type, Type> _pageMap = new Dictionary<Type, Type>();
+        private readonly Dictionary<Type, Type> _pageMap = new Dictionary<Type, Type>
+                                                               {
+                                                                   {
+                                                                       typeof(MovieDetailsViewModel),
+                                                                       typeof(MovieDetailsView)
+                                                                   }
+                                                               };
 
         public NavigationService(Func<INavigation> navigation, IComponentContext container)
         {

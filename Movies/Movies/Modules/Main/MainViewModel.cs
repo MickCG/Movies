@@ -1,60 +1,76 @@
 ﻿namespace Movies.Modules.Main
 {
-    using System;
     using System.Collections.ObjectModel;
     using System.Linq;
     using System.Threading.Tasks;
     using System.Windows.Input;
 
+    using Movies.Common.Base;
     using Movies.Common.Models;
+    using Movies.Common.NavigationService;
     using Movies.Common.Network;
+    using Movies.Modules.MovieDetails;
 
     using Xamarin.Forms;
 
-    public class MainViewModel : BindableObject
+    public class MainViewModel : BaseViewModel
     {
-            private readonly INetworkService _networkService;
+        private readonly INetworkService _networkService;
 
-            public MainViewModel(INetworkService networkService)
-            {
-                this._networkService = networkService;
-                this.Items = new ObservableCollection<MovieData>();
-            }
+        private readonly INavigationService _navigationService;
 
-            public ObservableCollection<MovieData> Items { get; set; }
+        private MovieData _selectedMovie;
 
-            public ICommand MovieChangedCommand
-            {
-                get
-                {
-                    return new Command(() => { throw new NotImplementedException(); });
-                }
-            }
+        public MainViewModel(INetworkService networkService, INavigationService navigationService)
+        {
+            this._networkService = networkService;
+            this.Items = new ObservableCollection<MovieData>();
+            this._navigationService = navigationService;
+        }
 
-            public ICommand PerformSearchCommand
-            {
-                get => new Command(async () => await this.GetMovieData());
-            }
+        public ObservableCollection<MovieData> Items { get; set; }
 
-            public string SearchText { get; set; }
+        public ICommand MovieChangedCommand
+        {
+            get => new Command(async () => await this.GoToMovieDetails());
+        }
 
-            private async Task GetMovieData()
-            {
-                var result = await this._networkService.GetAsync<ListOfMovies>(ApiConstants.GetApiUri(this.SearchText));
-                this.Items.Clear();
-                if (result.Search == null || result.Search.Count == 0) return;
+        public ICommand PerformSearchCommand
+        {
+            get => new Command(async () => await this.GetMovieData());
+        }
 
-                this.Items = new ObservableCollection<MovieData>(
-                    result.Search
+        public string SearchText { get; set; }
 
-                        // Eliminate duplicate movies
-                        .GroupBy(x => new { x.Title, x.Year }).Select(x => x.First())
+        public MovieData SelectedMovie
+        {
+            get => this._selectedMovie;
+            set => this.SetProperty(ref this._selectedMovie, value);
+        }
 
-                        // Sort by year descending
-                        .OrderByDescending(x => x.Year)
-                        .Select(x => new MovieData(x.Title, x.Poster.Replace("SX300", "SX600"))));
-                this.OnPropertyChanged("Items");
-            }
-        
+        private async Task GetMovieData()
+        {
+            var result = await this._networkService.GetAsync<ListOfMovies>(ApiConstants.GetApiUri(this.SearchText));
+            this.Items.Clear();
+            if (result.Search == null || result.Search.Count == 0) return;
+
+            this.Items = new ObservableCollection<MovieData>(
+                result.Search
+
+                    // Eliminate duplicate movies
+                    .GroupBy(x => new { x.Title, x.Year }).Select(x => x.First())
+
+                    // Sort by year descending
+                    .OrderByDescending(x => x.Year).Select(
+                        x => new MovieData(x.Title, x.Poster.Replace("SX300", "SX600"), x.Year, x.ImdbID)));
+            this.OnPropertyChanged("Items");
+        }
+
+        private async Task GoToMovieDetails()
+        {
+            if (this.SelectedMovie == null) return;
+            await this._navigationService.PushAsync<MovieDetailsViewModel>(this.SelectedMovie);
+            this.SelectedMovie = null;
+        }
     }
 }
