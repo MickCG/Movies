@@ -48,6 +48,14 @@
             set => this.SetProperty(ref this._selectedMovie, value);
         }
 
+        private string _selectedMovieId;
+
+        public string SelectedMovieId
+        {
+            get => this._selectedMovieId;
+            set => SetProperty(ref this._selectedMovieId, value);
+        }
+
         // still not running correctly after 2:50 #47
         private async Task GetMovieData()
         {
@@ -63,6 +71,7 @@
         {
             if (this.SelectedMovie == null) return;
 
+            SelectedMovieId = SelectedMovie.IMdbID;
             await this._navigationService.PushAsync<MovieDetailsViewModel>(this.SelectedMovie);
             this.SelectedMovie = null;
         }

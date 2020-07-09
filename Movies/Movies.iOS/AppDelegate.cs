@@ -26,6 +26,7 @@ namespace Movies.iOS
         //
         public override bool FinishedLaunching(UIApplication app, NSDictionary options)
         {
+            Xamarin.Forms.Forms.SetFlags("Expander_Experimental");
             global::Xamarin.Forms.Forms.Init();
             CachedImageRenderer.Init();
             CachedImageRenderer.InitImageSourceHandler();

@@ -7,7 +7,7 @@
 
     using Movies.Common.NavigationService;
     using Movies.Modules.Main;
-
+    using Plugin.SharedTransitions;
     using Xamarin.Forms;
 
     public partial class App : Application
@@ -24,7 +24,7 @@
             builder.RegisterAssemblyTypes(dataAccess).AsImplementedInterfaces().AsSelf();
 
             // register navigation service
-            NavigationPage navigationPage = null;
+            SharedTransitionNavigationPage navigationPage = null;
             Func<INavigation> navigationFunc = () => { return navigationPage.Navigation; };
             builder.RegisterType<NavigationService>().As<INavigationService>()
                 .WithParameter("navigation", navigationFunc);
@@ -33,7 +33,7 @@
             var container = builder.Build();
 
             // set first page
-            navigationPage = new NavigationPage(container.Resolve<MainView>());
+            navigationPage = new SharedTransitionNavigationPage(container.Resolve<MainView>());
             this.MainPage = navigationPage;
         }
 
