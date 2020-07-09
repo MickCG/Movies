@@ -6,16 +6,18 @@
     {
         private string _imageSource;
 
+        private string _ImageUrl;
+
         private string _imdbID;
 
         private string _title;
 
         private string _year;
 
-        public MovieData(string title, string imageUri, string year, string imdbID)
+        public MovieData(string title, string ImageUrl, string year, string imdbID)
         {
             this._title = title;
-            this.Image = imageUri;
+            this.Image = ImageUrl;
             this._year = year;
             this._imdbID = imdbID;
         }
@@ -26,6 +28,16 @@
             set
             {
                 this._imageSource = value;
+                this.OnPropertyChanged();
+            }
+        }
+
+        public string ImageUrl
+        {
+            get => this._ImageUrl;
+            set
+            {
+                this._ImageUrl = value;
                 this.OnPropertyChanged();
             }
         }
@@ -52,7 +64,7 @@
 
         public string Year
         {
-            get => this._title;
+            get => this._year;
             set
             {
                 this._year = value;

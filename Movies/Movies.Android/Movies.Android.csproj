@@ -111,5 +111,41 @@
     <AndroidResource Include="Resources\drawable-mdpi\placeholder.png" />
     <AndroidResource Include="Resources\drawable-ldpi\placeholder.png" />
   </ItemGroup>
+  <ItemGroup>
+      <AndroidResource Include="Resources\drawable-xxxhdpi\placeholder.png"/>
+      <AndroidResource Include="Resources\drawable-xxhdpi\placeholder.png"/>
+      <AndroidResource Include="Resources\drawable-xhdpi\placeholder.png"/>
+      <AndroidResource Include="Resources\drawable-hdpi\placeholder.png"/>
+      <AndroidResource Include="Resources\drawable-mdpi\placeholder.png"/>
+      <AndroidResource Include="Resources\drawable-ldpi\placeholder.png"/>
+  </ItemGroup>
+  <ItemGroup>
+      <AndroidResource Include="Resources\drawable-xxxhdpi\close.png"/>
+      <AndroidResource Include="Resources\drawable-xxhdpi\close.png"/>
+      <AndroidResource Include="Resources\drawable-xhdpi\close.png"/>
+      <AndroidResource Include="Resources\drawable-hdpi\close.png"/>
+      <AndroidResource Include="Resources\drawable-mdpi\close.png"/>
+      <AndroidResource Include="Resources\drawable-ldpi\close.png"/>
+  </ItemGroup>
+  <ItemGroup>
+      <AndroidResource Include="Resources\drawable-xxxhdpi\emptyHeart.png"/>
+      <AndroidResource Include="Resources\drawable-xxhdpi\emptyHeart.png"/>
+      <AndroidResource Include="Resources\drawable-xhdpi\emptyHeart.png"/>
+      <AndroidResource Include="Resources\drawable-hdpi\emptyHeart.png"/>
+      <AndroidResource Include="Resources\drawable-mdpi\emptyHeart.png"/>
+      <AndroidResource Include="Resources\drawable-ldpi\emptyHeart.png"/>
+  </ItemGroup>
+  <ItemGroup>
+      <AndroidResource Include="Resources\drawable-xxxhdpi\fullHeart.png"/>
+      <AndroidResource Include="Resources\drawable-xxhdpi\fullHeart.png"/>
+      <AndroidResource Include="Resources\drawable-xhdpi\fullHeart.png"/>
+      <AndroidResource Include="Resources\drawable-hdpi\fullHeart.png"/>
+      <AndroidResource Include="Resources\drawable-mdpi\fullHeart.png"/>
+      <AndroidResource Include="Resources\drawable-ldpi\fullHeart.png"/>
+  </ItemGroup>
+
+
+
+
   <Import Project="$(MSBuildExtensionsPath)\Xamarin\Android\Xamarin.Android.CSharp.targets" />
 </Project>

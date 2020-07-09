@@ -15,9 +15,9 @@
 
     public class MainViewModel : BaseViewModel
     {
-        private readonly INetworkService _networkService;
-
         private readonly INavigationService _navigationService;
+
+        private readonly INetworkService _networkService;
 
         private MovieData _selectedMovie;
 
@@ -48,27 +48,21 @@
             set => this.SetProperty(ref this._selectedMovie, value);
         }
 
+        // still not running correctly after 2:50 #47
         private async Task GetMovieData()
         {
             var result = await this._networkService.GetAsync<ListOfMovies>(ApiConstants.GetApiUri(this.SearchText));
-            this.Items.Clear();
-            if (result.Search == null || result.Search.Count == 0) return;
-
             this.Items = new ObservableCollection<MovieData>(
-                result.Search
-
-                    // Eliminate duplicate movies
-                    .GroupBy(x => new { x.Title, x.Year }).Select(x => x.First())
-
-                    // Sort by year descending
-                    .OrderByDescending(x => x.Year).Select(
-                        x => new MovieData(x.Title, x.Poster.Replace("SX300", "SX600"), x.Year, x.ImdbID)));
+                result.Search.Select(
+                    x => new MovieData(x.Title, x.Poster.Replace("SX300", "SX600"), x.Year, x.ImdbID)));
             this.OnPropertyChanged("Items");
         }
 
+        // this matches the end of #45 and the begining of $46.
         private async Task GoToMovieDetails()
         {
             if (this.SelectedMovie == null) return;
+
             await this._navigationService.PushAsync<MovieDetailsViewModel>(this.SelectedMovie);
             this.SelectedMovie = null;
         }

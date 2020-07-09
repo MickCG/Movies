@@ -4,9 +4,55 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:d="http://xamarin.com/schemas/2014/forms/design"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:ffimageloading="clr-namespace:FFImageLoading.Forms;assembly=FFImageLoading.Forms"
+             xmlns:local="clr-namespace:Movies.Common.Converters;assembly=Movies"
              mc:Ignorable="d"
-             x:Class="Movies.Modules.MovieDetails.MovieDetailsView">
+             x:Class="Movies.Modules.MovieDetails.MovieDetailsView"
+             NavigationPage.HasNavigationBar="False">
+    <ContentPage.Resources>
+        <ResourceDictionary>
+            <local:BoolToFavoriteImageConverter x:Key="boolToFavorite" />
+        </ResourceDictionary>
+    </ContentPage.Resources>
     <ContentPage.Content>
-        <Label Text="Movie Details" />
+        <ScrollView VerticalOptions="FillAndExpand"
+                    BackgroundColor="White">
+            <StackLayout>
+                <Grid>
+                    <ffimageloading:CachedImage Source="{Binding MovieData.Image}"
+                                                Aspect="AspectFill"
+                                                HeightRequest="500" />
+                    <Frame WidthRequest="40"
+                           HeightRequest="40"
+                           Margin="0,50,30,0"
+                           Padding="0"
+                           VerticalOptions="Start"
+                           HorizontalOptions="End"
+                           CornerRadius="20">
+                        <ImageButton Source="close.png"
+                                     BackgroundColor="White"
+                                     Command="{Binding GoBackCommand}" />
+                    </Frame>
+                </Grid>
+                <Label Text="{Binding MovieData.Title}"
+                       Padding="20,8,0,0"
+                       FontAttributes="Bold"
+                       FontSize="Title" />
+                <Grid>
+                    <Label Text="{Binding MovieData.Year, StringFormat='Year: {0}'}"
+                           Padding="20,8,0,0"
+                           TextColor="Gray" />
+                    <ImageButton x:Name="ImageButton"
+                                 Source="{Binding IsFavorite, Converter={StaticResource boolToFavorite}}"
+                                 Clicked="ImageButton_OnClicked"
+                                 HorizontalOptions="End"
+                                 Margin="0,0,30,0"
+                                 WidthRequest="50"
+                                 HeightRequest="50"
+                                 BackgroundColor="White"
+                                 Command="{Binding FavoriteCommand}" />
+                </Grid>
+            </StackLayout>
+        </ScrollView>
     </ContentPage.Content>
 </ContentPage>

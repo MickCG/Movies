@@ -156,4 +156,60 @@
       <Visible>False</Visible>
     </ImageAsset>
   </ItemGroup>
+  <ItemGroup>
+    <ImageAsset Include="Assets.xcassets\placeholder.imageset\placeholder%403x.png">
+      <Visible>false</Visible>
+    </ImageAsset>
+    <ImageAsset Include="Assets.xcassets\placeholder.imageset\placeholder%402x.png">
+      <Visible>false</Visible>
+    </ImageAsset>
+    <ImageAsset Include="Assets.xcassets\placeholder.imageset\placeholder.png">
+      <Visible>false</Visible>
+    </ImageAsset>
+    <ImageAsset Include="Assets.xcassets\placeholder.imageset\Contents.json">
+      <Visible>False</Visible>
+    </ImageAsset>
+  </ItemGroup>
+  <ItemGroup>
+    <ImageAsset Include="Assets.xcassets\close.imageset\close%403x.png">
+      <Visible>false</Visible>
+    </ImageAsset>
+    <ImageAsset Include="Assets.xcassets\close.imageset\close%402x.png">
+      <Visible>false</Visible>
+    </ImageAsset>
+    <ImageAsset Include="Assets.xcassets\close.imageset\close.png">
+      <Visible>false</Visible>
+    </ImageAsset>
+    <ImageAsset Include="Assets.xcassets\close.imageset\Contents.json">
+      <Visible>False</Visible>
+    </ImageAsset>
+  </ItemGroup>
+  <ItemGroup>
+    <ImageAsset Include="Assets.xcassets\emptyHeart.imageset\emptyHeart%403x.png">
+      <Visible>false</Visible>
+    </ImageAsset>
+    <ImageAsset Include="Assets.xcassets\emptyHeart.imageset\emptyHeart%402x.png">
+      <Visible>false</Visible>
+    </ImageAsset>
+    <ImageAsset Include="Assets.xcassets\emptyHeart.imageset\emptyHeart.png">
+      <Visible>false</Visible>
+    </ImageAsset>
+    <ImageAsset Include="Assets.xcassets\emptyHeart.imageset\Contents.json">
+      <Visible>False</Visible>
+    </ImageAsset>
+  </ItemGroup>
+  <ItemGroup>
+    <ImageAsset Include="Assets.xcassets\fullHeart.imageset\fullHeart%403x.png">
+      <Visible>false</Visible>
+    </ImageAsset>
+    <ImageAsset Include="Assets.xcassets\fullHeart.imageset\fullHeart%402x.png">
+      <Visible>false</Visible>
+    </ImageAsset>
+    <ImageAsset Include="Assets.xcassets\fullHeart.imageset\fullHeart.png">
+      <Visible>false</Visible>
+    </ImageAsset>
+    <ImageAsset Include="Assets.xcassets\fullHeart.imageset\Contents.json">
+      <Visible>False</Visible>
+    </ImageAsset>
+  </ItemGroup>
 </Project>
