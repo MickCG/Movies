@@ -1,9 +1,11 @@
 ﻿namespace Movies.Modules.MovieDetails
 {
+    using System.Linq;
     using System.Threading.Tasks;
     using System.Windows.Input;
 
     using Movies.Common.Base;
+    using Movies.Common.Database;
     using Movies.Common.Models;
     using Movies.Common.NavigationService;
     using Movies.Common.Network;
@@ -23,10 +25,15 @@
 
         private readonly INetworkService _networkService;
 
-        public MovieDetailsViewModel(INavigationService navigationService, INetworkService networkService)
+        private IRepository<FullMovieInformation> _MovieInformationRepository;
+
+        public MovieDetailsViewModel(INavigationService navigationService, 
+                                     INetworkService networkService,
+                                     IRepository<FullMovieInformation> repositroy)
         {
             this._navigationService = navigationService;
             this._networkService = networkService;
+            this._MovieInformationRepository = repositroy;
         }
 
         public ICommand FavoriteCommand => new Command(async () => await this.SetMovieFavorite());
@@ -60,6 +67,14 @@
             this.MovieInformation =
                 await this._networkService.GetAsync<FullMovieInformation>(
                     ApiConstants.GetMovieById(this.MovieData.IMdbID));
+            var dbinfo =
+                (await this._MovieInformationRepository.GetAllAsync()).FirstOrDefault(
+                    x => x.imdbID == MovieInformation.imdbID);
+            if (dbinfo != null)
+            {
+                MovieInformation.Id = dbinfo.Id;
+                IsFavorite = dbinfo.IsFavorite;
+            }
         }
 
         private async Task GoBack()
@@ -70,6 +85,8 @@
         private async Task SetMovieFavorite()
         {
             this.IsFavorite = !this.IsFavorite;
+            MovieInformation.IsFavorite = IsFavorite;
+            await this._MovieInformationRepository.SaveAsync(MovieInformation);
         }
     }
 }

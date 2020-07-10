@@ -5,6 +5,8 @@
 
     using Autofac;
 
+    using Movies.Common.Database;
+    using Movies.Common.Models;
     using Movies.Common.NavigationService;
     using Movies.Modules.Main;
     using Plugin.SharedTransitions;
@@ -22,6 +24,7 @@
             // scan and register all classes in the assembly
             var dataAccess = Assembly.GetExecutingAssembly();
             builder.RegisterAssemblyTypes(dataAccess).AsImplementedInterfaces().AsSelf();
+            builder.RegisterType<Repository<FullMovieInformation>>().As<IRepository<FullMovieInformation>>();
 
             // register navigation service
             SharedTransitionNavigationPage navigationPage = null;

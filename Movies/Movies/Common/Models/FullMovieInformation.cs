@@ -1,8 +1,16 @@
-﻿namespace Movies.Common.Models
+﻿using System.Collections.Generic;
+
+using Movies.Common.Models;
+
+namespace Movies.Common.Models
 {
     using System.Collections.Generic;
 
-    public class FullMovieInformation
+    using Movies.Common.Database;
+
+    using SQLite;
+
+    public class FullMovieInformation : IDatabaseItem
     {
         public string Actors { get; set; }
 
@@ -36,6 +44,7 @@
 
         public string Rated { get; set; }
 
+        [Ignore]
         public IList<Rating> Ratings { get; set; }
 
         public string Released { get; set; }
@@ -53,5 +62,10 @@
         public string Writer { get; set; }
 
         public string Year { get; set; }
+
+        public bool IsFavorite { get; set; }
+
+        [PrimaryKey, AutoIncrement]
+        public int Id { get; set; }
     }
 }
